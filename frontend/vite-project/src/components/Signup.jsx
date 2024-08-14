@@ -58,7 +58,8 @@ export default function Signup() {
   return (
     <>
     <div className="contact flex justify-center items-center p-3 mt-36 h-screen relative">
-<div className="contactus bg-[#F1F0FE] p-20 rounded-r-full justify-center relative z-10 w-[60%] h-[600px]  mr-auto">
+<div className="contactus bg-[#F1F0FE] p-20 rounded-r-full justify-center 
+relative z-10 w-[60%] h-[600px]  mr-auto">
   <div className="details ">
     <h6 className="text-sm text-[#7a6ad8] font-semibold"> CONTACT US</h6>
     <h2 className="text-4xl font-semibold w-[65%] mt-4">Feel free to contact us anytime</h2>
@@ -68,18 +69,20 @@ export default function Signup() {
   </div>
   
 
-   <div className="special-offer mt-12 bg-white rounded-3xl h-[100px] w-[65%] pt-[30px] pr-[30px] flex justify-between items-center relative">
+   <div className="special-offer mt-12 bg-white rounded-3xl h-[120px] w-[65%] 
+   pt-[30px] pr-[30px] flex justify-between items-center relative">
       <div className="flex flex-col items-center w-full">
         <div className="text-center mb-6">
           <p className="offer">OFF
           <br />
           <h4 className="text-2xl font-semibold">50%</h4>
           </p>
-          <div className="flex justify-center w-full">
-            <h6 className="text-sm">VALID:</h6>
-            <h6 className="text-sm text-[#7a6ad8] font-bold ml-1">24 APRIL 2036</h6>
+          <div className="flex justify-center w-full ml-7 mb-2">
+            <h6 className="text-md ">VALIDE:</h6>
+            <h6 className="text-md text-[#7a6ad8] font-bold ml-1">24 APRIL 2036</h6>
           </div>
-          <h4 className="font-bold mt-1 w-full text-xl ml-7">Special Offer <span className="text-[#7a6ad8] font-bold text-xl">50%</span> OFF!</h4>
+          <h4 className="font-bold mb- w-full text-xl ml-7">Special Offer <span className="text-[#7a6ad8] font-bold text-xl">50%</span></h4>
+          <h4 className="font-bold mb- w-full text-xl -ml-8">OFF!</h4>
         </div>
       </div>
       <div className="">

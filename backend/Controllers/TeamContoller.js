@@ -1,4 +1,3 @@
-// const { Blog } = require("../models/Blog.model");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const {Team} =require("../models/Team")
 exports.createTeam = async (req, res) => {
@@ -22,7 +21,7 @@ exports.createTeam = async (req, res) => {
       thumbnail: thumbnail.url || "",
     });
     await blog.save();
-    return res.status(200).json({ message: "Blog Added SuccessFully", blog });
+    return res.status(200).json({ message: "Team Added SuccessFully", blog });
   } catch (error) {
     return res.status(500).json(error.message);
   }
@@ -56,7 +55,6 @@ exports.updateTeam = async (req, res) => {
     const { id } = req.params;
     const { name, position } = req.body;
 
-    // Check if team member exists
     let teamMember = await Team.findById(id);
     if (!teamMember) {
       return res.status(404).json({ message: "Team member not found" });

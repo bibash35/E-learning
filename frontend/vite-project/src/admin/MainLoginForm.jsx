@@ -5,7 +5,7 @@ import {  useNavigate } from "react-router-dom";
 
 import "./adminstyle.css";
 
-const MainLoginForm = () => {
+  const MainLoginForm = ({ setIsAuthenticated }) => {
 
   const navigate= useNavigate()
 
@@ -20,7 +20,7 @@ const MainLoginForm = () => {
     setData({ ...data, [e.target.name]: e.target.value });
     setFormError({
       ...formError,
-      [e.target.name]: '', // Clear the error message on input change
+      [e.target.name]: '', 
     });
   };
 
@@ -30,7 +30,6 @@ const MainLoginForm = () => {
     let errors = {};
 
     if (!data.username && !data.password) {
-      // errors.username = "Please fill out this field"; 
       toast.error("Please fill username and password.");
 
     }
@@ -52,13 +51,14 @@ const MainLoginForm = () => {
       axios.post("http://localhost:8081/api/adminlogin", data)
         .then((res) => {
           toast.success("Message sent successful");
+          setIsAuthenticated(true);
           navigate('/adminpanel')
 
         })
         .catch((err) => {
-          
-            console.log(err);
-        
+          console.log(err);
+            toast.error("Please fill valid username and password");
+
         });
     }
   };
@@ -66,7 +66,7 @@ const MainLoginForm = () => {
         <>
         <Toaster />
 
-  <div className="bg-[#7a6ad8] h-screen overflow-hidden flex items-center justify-center">
+  <div className="bg-[#F1F0FE] h-screen overflow-hidden flex items-center justify-center">
     <div className="bg-white lg:w-5/12 md:6/12 w-10/12 shadow-3xl">
      
       <form className="p-12 md:p-24" onSubmit={handleSubmit}>

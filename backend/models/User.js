@@ -3,12 +3,12 @@ const mongoose=require("mongoose");
 const{Schema}=mongoose;
 
 const UserSchema=new Schema({
-    Username: String,
+Username: String,
+
   email: {
-    // unique:true,
     type: String,
-   
   },
+  
     message:{
         type:String,
     },

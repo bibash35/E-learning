@@ -1,4 +1,3 @@
-// const { Blog } = require("../models/Blog.model");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const {Event} =require("../models/Event")
 exports.createEvent = async (req, res) => {
@@ -25,7 +24,7 @@ exports.createEvent = async (req, res) => {
       thumbnail: thumbnail.url || "",
     });
     await blog.save();
-    return res.status(200).json({ message: "Blog Added SuccessFully", blog });
+    return res.status(200).json({ message: "Event Added SuccessFully", blog });
   } catch (error) {
     return res.status(500).json(error.message);
   }

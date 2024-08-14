@@ -19,7 +19,7 @@ const Addfaq = () => {
   const fetchFaqs = async () => {
     try {
       const res = await axios.get("http://localhost:8081/api/getfaqs");
-      setFaqs(res.data);  // Ensure this matches the response structure
+      setFaqs(res.data);  
     } catch (err) {
       console.error(err);
       toast.error("Failed to fetch FAQs.");
@@ -30,7 +30,7 @@ const Addfaq = () => {
     setData({ ...data, [e.target.name]: e.target.value });
     setFormError({
       ...formError,
-      [e.target.name]: '', // Clear the error message on input change
+      [e.target.name]: '',
     });
   };
 

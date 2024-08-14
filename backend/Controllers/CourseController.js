@@ -1,4 +1,3 @@
-// const { Blog } = require("../models/Blog.model");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const {Course} =require("../models/Course")
 exports.createCourse = async (req, res) => {
@@ -24,7 +23,7 @@ exports.createCourse = async (req, res) => {
       thumbnail: thumbnail.url || "",
     });
     await blog.save();
-    return res.status(200).json({ message: "Blog Added SuccessFully", blog });
+    return res.status(200).json({ message: "Course Added SuccessFully", blog });
   } catch (error) {
     return res.status(500).json(error.message);
   }
@@ -57,7 +56,6 @@ exports.updateCourse = async (req, res) => {
     const { id } = req.params;
     const { course, price, name, involved } = req.body;
 
-    // Fetch the existing course details
     const existingCourse = await Course.findById(id);
     if (!existingCourse) {
       return res.status(404).json({ message: "Course not found" });
@@ -80,7 +78,6 @@ exports.updateCourse = async (req, res) => {
     existingCourse.involved = involved !== undefined ? involved : existingCourse.involved;
     existingCourse.thumbnail = thumbnailUrl;
 
-    // Save updated course
     await existingCourse.save();
     
     return res.status(200).json({ message: "Course updated successfully", course: existingCourse });

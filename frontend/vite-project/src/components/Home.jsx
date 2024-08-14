@@ -60,62 +60,16 @@ export default function Home() {
     },
   ];
 
-  // const [filters, setFilter] = useState("All");
-
-  // const courses = [
-  //   {
-  //     category: "WEBDESIGN",
-  //     price: "$160",
-  //     name: "Stella Blair",
-  //     involved: "Online Learning Steps",
-  //     img: "https://themewagon.github.io/scholar/assets/images/course-01.jpg",
-  //   },
-  //   {
-  //     category: "DEVELOPMENT",
-  //     price: "$340",
-  //     name: "Cindy Walker",
-  //     involved: "Web Development Tips",
-  //     img: "https://themewagon.github.io/scholar/assets/images/course-02.jpg",
-  //   },
-  //   {
-  //     category: "WORDPRESS",
-  //     price: "$640",
-  //     name: "David Hutson",
-  //     involved: "Latest Web Trends",
-  //     img: "https://themewagon.github.io/scholar/assets/images/course-03.jpg",
-  //   },
-  //   {
-  //     category: "DEVELOPMENT",
-  //     price: "$450",
-  //     name: "Sophia Rose",
-  //     involved: "Online Learning Steps",
-  //     img: "https://themewagon.github.io/scholar/assets/images/course-04.jpg",
-  //   },
-  //   {
-  //     category: "WORDPRESS",
-  //     price: "$320",
-  //     name: "Stella Blair",
-  //     involved: "Online Learning Steps",
-  //     img: "https://themewagon.github.io/scholar/assets/images/course-05.jpg",
-  //   },
-  //   {
-  //     category: "WEBDESIGN",
-  //     price: "$240",
-  //     name: "Stella Blair",
-  //     involved: "Online Learning Steps",
-  //     img: "https://themewagon.github.io/scholar/assets/images/course-06.jpg",
-  //   },
-  // ];
-
+  
   const [filter, setFilter] = useState("ALL");
   const [courses, setCourses] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursesPerPage = 6;
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8081/api/getcourses"
-        );
+        const response = await axios.get("http://localhost:8081/api/getcourses");
         console.log(response.data.Courses);
         setCourses(response.data.Courses);
       } catch (error) {
@@ -127,6 +81,20 @@ export default function Home() {
   }, []);
 
   const filterOptions = ["ALL", "WEBDESIGN", "DEVELOPMENT", "WORDPRESS"];
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const filteredCourses = courses.filter((course) =>
+    filter === "ALL" ? true : course.course === filter
+  );
+
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = filteredCourses.slice(indexOfFirstCourse, indexOfLastCourse);
+
+  const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) =>
@@ -233,8 +201,9 @@ export default function Home() {
         <Services />
       </div>
 
-      {/* courses part */}
-      <div className="latestcourses" id="courses">
+   
+
+<div className="latestcourses" id="courses">
         <span>LATEST COURSES</span>
         <h1>Latest Courses</h1>
         <div className="list-options">
@@ -252,13 +221,21 @@ export default function Home() {
         </div>
 
         <div className="flex flex-wrap justify-center items-center gap-7 mx-auto max-w-6xl">
-          {courses
-            .filter((course) =>
-              filter === "ALL" ? true : course.course === filter
-            )
-            .map((course, index) => (
-              <Category key={index} courses={course} />
-            ))}
+          {currentCourses.map((course, index) => (
+            <Category key={index} courses={course} />
+          ))}
+        </div>
+
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`page-button ${currentPage === index + 1 ? "active" : ""}`}
+            >
+              {index + 1}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -293,18 +270,18 @@ export default function Home() {
       {/* testinomial part  */}
 
       <div className="flex justify-center mt-36 items-center p-3  h-screen relative">
-        <div className="bg-[#7A6AD8] text-white p-8 rounded-3xl flex left-64 w-[45%] flex-col absolute h-[400px] z-50 mt-32">
-          <div>
-            <p className="text-lg top-[40px] relative italic">
+        <div className="bg-[#7A6AD8] text-white p-8 rounded-3xl flex left-36 w-[45%] flex-col absolute h-[400px] z-50 mt-32">
+          <div className="relative h-full">
+            <p className="text-xl leading-10 top-[40px] ml-11 w-[85%] absolute italic">
               {position[positionIndex].desc}
             </p>
-            <div className="flex items-center relative top-[150px] ">
+            <div className="flex items-center absolute top-[230px]  ">
               <img
                 src={position[positionIndex].img}
                 alt={position[positionIndex].name}
-                className="w-24 h-24 rounded-full mr-4"
+                className="w-24 h-24 rounded-full ml-10 mr-4 "
               />
-              <div>
+              <div className="">
                 <p className="">{position[positionIndex].pos}</p>
                 <p className="font-bold text-2xl">
                   {position[positionIndex].name}
@@ -328,15 +305,17 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-[#F1F0FE] p-20 mt-36 rounded-l-full justify-center relative z-10 w-[60%] h-[600px] flex items-center ml-auto">
-          <div className="flex flex-col justify-end items-center ml-24">
+        {/* <div className="bg-[#F1F0FE] p-20 mt-36 rounded-l-full justify-center relative z-10 w-[60%] h-[600px] flex items-center ml-auto"> */}
+        <div className="bg-[#F1F0FE] p-20 mt-36 rounded-l-full justify-center relative z-10 w-[70%] h-[600px] flex items-center ml-auto">
+          {/* <div className="flex flex-col justify-end items-center ml-24"> */}
+          <div className="flex flex-col justify-end items-center ml-10">
             <h6 className="text-base font-semibold text-[#7a6ad8]">
               TESTIMONIAL
             </h6>
-            <h2 className="text-2xl font-bold mb-2 ml-44 mt-4">
+            <h2 className="text-4xl leading-10 w-[50%] font-bold mb-2 ml-64 mt-4">
               What They Say About Us?
             </h2>
-            <p className="text-sm mt-12 ml-56">
+            <p className="text-md mt-8 leading-7 ml-80 text-[#4a4a4a]">
               You can search free CSS templates on Google using different
               keywords such as templatemoo portfolio, templatemoo gallery,
               templatemoo blue color, etc.
