@@ -41,7 +41,7 @@ export default function Signup() {
     setFormError(errors);
 
     if (Object.keys(errors).length === 0) {
-      axios.post("http://localhost:8081/api/signup", data)
+      axios.post("https://e-learning-udys.onrender.com/api/signup", data)
         .then((res) => {
           toast.success("Message sent successful");
         })

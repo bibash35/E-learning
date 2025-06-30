@@ -69,7 +69,7 @@ export default function Home() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:8081/api/getcourses");
+        const response = await axios.get("https://e-learning-udys.onrender.com/api/getcourses");
         console.log(response.data.Courses);
         setCourses(response.data.Courses);
       } catch (error) {

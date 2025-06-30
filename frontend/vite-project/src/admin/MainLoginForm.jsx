@@ -48,7 +48,7 @@ import "./adminstyle.css";
     setFormError(errors);
 
     if (Object.keys(errors).length === 0) {
-      axios.post("http://localhost:8081/api/adminlogin", data)
+      axios.post("https://e-learning-udys.onrender.com/api/adminlogin", data)
         .then((res) => {
           toast.success("Message sent successful");
           setIsAuthenticated(true);

@@ -18,7 +18,7 @@ const Addfaq = () => {
 
   const fetchFaqs = async () => {
     try {
-      const res = await axios.get("http://localhost:8081/api/getfaqs");
+      const res = await axios.get("https://e-learning-udys.onrender.com/api/getfaqs");
       setFaqs(res.data);  
     } catch (err) {
       console.error(err);
@@ -52,8 +52,8 @@ const Addfaq = () => {
 
     if (Object.keys(errors).length === 0) {
       const apiCall = editId 
-        ? axios.put(`http://localhost:8081/api/update-faqs/${editId}`, data) 
-        : axios.post("http://localhost:8081/api/create-faq", data);
+        ? axios.put(`https://e-learning-udys.onrender.com/api/update-faqs/${editId}`, data) 
+        : axios.post("https://e-learning-udys.onrender.com/api/create-faq", data);
       
       apiCall
         .then((res) => {
@@ -70,7 +70,7 @@ const Addfaq = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8081/api/delete-faqs/${id}`)
+    axios.delete(`https://e-learning-udys.onrender.com/api/delete-faqs/${id}`)
       .then(() => {
         toast.success("FAQ deleted successfully");
         fetchFaqs();

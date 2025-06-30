@@ -20,7 +20,8 @@ const AddCourse = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/api/getcourses');
+      // const response = await axios.get('https://e-learning-udys.onrender.com/api/getcourses');
+      const response = await axios.get('https://e-learning-udys.onrender.com/api/getcourses');
       setCourses(response.data.Courses);
     } catch (error) {
       toast.error('Failed to fetch courses.');
@@ -48,13 +49,14 @@ const AddCourse = () => {
 
     try {
       if (editMode) {
-        const response = await axios.put(`http://localhost:8081/api/update-course/${selectedCourseId}`, formData, {
+        const response = await axios.put(`https://e-learning-udys.onrender.com/api/update-course/${selectedCourseId}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         toast.success('Course updated successfully!');
         console.log('Update response:', response.data);
       } else {
-        const response = await axios.post('http://localhost:8081/api/create-course', formData, {
+        // const response = await axios.post('https://e-learning-udys.onrender.com/api/create-course', formData, {
+        const response = await axios.post('https://e-learning-udys.onrender.com/api/create-course', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         toast.success('Course added successfully!');
@@ -90,7 +92,7 @@ const AddCourse = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8081/api/delete-course/${id}`);
+      await axios.delete(`https://e-learning-udys.onrender.com/api/delete-course/${id}`);
       toast.success('Course deleted successfully!');
       fetchCourses(); // Fetch updated courses list
     } catch (error) {

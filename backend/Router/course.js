@@ -8,6 +8,7 @@ const {
   updateCourse,
 
 } = require("../Controllers/CourseController");
+
 router
   .post(
     "/create-course",

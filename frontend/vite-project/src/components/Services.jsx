@@ -21,7 +21,7 @@ const Services = () => {
   useEffect(() => {
     const fetchFaqs = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/api/getfaqs');
+        const response = await axios.get('https://e-learning-udys.onrender.com/api/getfaqs');
         setFaqData(response.data);
       } catch (error) {
         console.error('Error fetching FAQ data:', error);

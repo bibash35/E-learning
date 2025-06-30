@@ -6,7 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 const Events = () => {
     const [events, setEvents] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8081/api/getevents')
+        axios.get('https://e-learning-udys.onrender.com/api/getevents')
           .then(response => {
             setEvents(response.data.Events);
           })

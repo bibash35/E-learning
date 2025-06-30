@@ -22,7 +22,7 @@ const AddEvent = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/api/getevents');
+      const response = await axios.get('https://e-learning-udys.onrender.com/api/getevents');
       setEvents(response.data.Events);
     } catch (error) {
       toast.error('Failed to fetch events. Please try again.');
@@ -47,12 +47,12 @@ const AddEvent = () => {
 
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:8081/api/updateEvent/${editingId}`, formData);
+        await axios.put(`https://e-learning-udys.onrender.com/api/updateEvent/${editingId}`, formData);
         toast.success('Event updated successfully!');
         setIsEditing(false);
         setEditingId(null);
       } else {
-        await axios.post('http://localhost:8081/api/create-event', formData);
+        await axios.post('https://e-learning-udys.onrender.com/api/create-event', formData);
         toast.success('Event added successfully!');
       }
       setEventData({
@@ -71,7 +71,7 @@ const AddEvent = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8081/api/deleteEvent/${id}`);
+      await axios.delete(`https://e-learning-udys.onrender.com/api/deleteEvent/${id}`);
       toast.success('Event deleted successfully!');
       fetchEvents();
     } catch (error) {

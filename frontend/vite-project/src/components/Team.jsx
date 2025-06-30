@@ -8,7 +8,7 @@ const Team = () => {
   useEffect(() => {
     const fetchTeamData = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/api/team/getTeams');
+        const response = await axios.get('https://e-learning-udys.onrender.com/api/team/getTeams');
         if (response.data && Array.isArray(response.data.teams)) {
           setTeamData(response.data.teams);
         } else {
